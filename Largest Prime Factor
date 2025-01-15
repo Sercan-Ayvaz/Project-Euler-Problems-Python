@@ -1,0 +1,29 @@
+""""
+------Largest Prime Factor------
+The prime factors of 13195 are 5,7,13 and 29.
+What is the largest prime factor of the number 600851475143?
+"""
+
+primeFactorNumbers = []
+primeFactor = []
+number = 600851475143
+
+for item in range(2,1000000,1):
+    if item == 2:
+       if item / 1 == item and item / item == 1 and item % 2 == 0 :
+           primeFactorNumbers.append(item) 
+    elif item / 1 == item and item / item == 1 and item % 2 == 1 :
+        primeFactorNumbers.append(item)                               
+
+for item in primeFactorNumbers:
+    while number % item == 0:
+        number = number / item
+        primeFactor.append(item)
+        if number == 1 :
+            break 
+         
+for i in primeFactor:
+    print(i)
+    
+print("\nThe greatest value: " + str(max(primeFactor)))
+    
