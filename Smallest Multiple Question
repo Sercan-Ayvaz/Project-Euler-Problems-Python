@@ -1,0 +1,57 @@
+----------------------------------- Smallest Multiple -----------------------------------
+
+Soru: 2520 is the smallest number that can be divided by each of the numbers from 1 to 10 without any remainder.
+What is the smallest positive number that is evenly divisible by all of the numbers from 1 to 20?
+
+
+
+# 1den 20 ye kadar olan sayılara bölünen ebobu kontrol eden değişken
+kontrol = True  
+# kontrol edilecek değişken
+number = 1  
+# 1 den 20 ye kadar bölündüğünü kontorl eden değişken
+sayac = 0  
+# kontrol true olduğu sürece dön
+while kontrol: 
+    sayac = 0
+    # i 1 den 20 kadar olan sayıları i'ye ata
+    for i in range(1,21):  
+        # sayı i ye bölümünden kalan sıfır ise if bloğuna gir
+        if number % i == 0:  
+            sayac += 1 
+            # sayac  20 ye eşitse if bloğuna gir
+            if sayac == 20:  
+                print(number)
+                kontrol = False
+                break
+        # number eğer 1 ile 20 arasında bir sayıya kalansız bölünmüyorsa dongüden çık
+        else:
+           break 
+    number += 1
+
+////////////////////////////////////////////////////////////////////////////////////////////
+# Daha kullanılabilir eşkilde yazılmış kod
+
+# GCD (Greatest Common Divisor - En Büyük Ortak Bölen) fonksiyonunu eklemek için math modülü içe aktarılıyor.
+from math import gcd 
+
+# En küçük ortak katı (EKOK) hesaplayan bir fonksiyon tanımlanıyor.
+def en_kucuk_ortak_kat(sayi_araligi):
+    # İki sayı için EKOK hesaplayan iç fonksiyon
+    def ekok(a, b):
+        # EKOK formülü: (a * b) / EBOB(a, b)  
+        return a * b // gcd(a, b) 
+
+    # Başlangıç değeri 1 (nötr eleman)
+    sonuc = 1 
+
+    # 1'den verilen sayı aralığına kadar tüm sayılar için döngü
+    for i in range(1, sayi_araligi + 1):
+        # Her adımda mevcut sonucu sıradaki sayının EKOK'u ile güncelle
+        sonuc = ekok(sonuc, i)
+
+    # En küçük ortak katı döndür
+    return sonuc  
+
+# 1'den 20'ye kadar olan sayıların en küçük ortak katını ekrana yazdır
+print(en_kucuk_ortak_kat(20))
